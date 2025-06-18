@@ -6,7 +6,7 @@ function Search(props) {
     props.getSearchResults(searchVal);
   }, [searchVal]);
   const clear = () => {
-    setSearchVal("");
+    setSearchVal(() => "");
     console.log(searchVal);
   };
   const handleSearch = (e) => {

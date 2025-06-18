@@ -1,6 +1,7 @@
 function Category(props) {
   const handleClick = (e) => {
     props.getBoard(e.target.value);
+
     // console.log(e.target.value);
   };
   const modalDisplay = () => {

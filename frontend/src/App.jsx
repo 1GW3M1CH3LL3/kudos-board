@@ -59,32 +59,52 @@ const boards_data = [
   },
 ];
 function App() {
-  const [boards, setBoards] = useState(boards_data);
+  const [boards, setBoards] = useState([]);
   const [isClick, setIsClick] = useState(false);
-  const getSearchResults = (value) => {
-    let items = [...boards_data];
+  const getSearchResults = async (value) => {
+    // let items = [...boards];
+    await fetchBoards();
     console.log(value);
-    items = items.filter((board) =>
-      board.title.toLowerCase().includes(value.toLowerCase())
+    setBoards((boards) =>
+      boards.filter((board) =>
+        board.title.toLowerCase().includes(value.toLowerCase())
+      )
     );
-    console.log(items);
-    setBoards(items);
   };
-  const getBoard = (value) => {
-    let items = [...boards_data];
+
+  async function fetchBoards() {
+    const url = `http://localhost:4000`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setBoards(() => data);
+  }
+  useEffect(() => {
+    fetchBoards();
+  }, []);
+  const getBoard = async (value) => {
+    //
+    //let items = [...boards];
+    //console.log("check items", items);
     if (value === "all") {
-      setBoards(items);
+      await fetchBoards();
     } else if (value === "recent") {
-      items = items.slice(items.length - 6, items.length);
+      await fetchBoards();
+      /*let items = [...boards];
+
+      items = items.slice(items.length - 6, items.length);*/
       console.log("recent");
-      setBoards(items);
-    } else {
-      items = items.filter((board) => board.category === value);
       // console.log(items);
-      // console.log(value);
-      setBoards(items);
+      setBoards((boards) => boards.slice(boards.length - 6, boards.length));
+    } else {
+      await fetchBoards();
+      setBoards((boards) =>
+        boards.filter(
+          (board) => board.category.toLowerCase() === value.toLowerCase()
+        )
+      );
     }
-    console.log(items);
+    // console.log(boards);
+    // console.log(items);
   };
   return (
     <>
