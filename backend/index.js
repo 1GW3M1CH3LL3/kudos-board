@@ -5,9 +5,9 @@ const PORT = 4000;
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const cors = require("cors");
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -73,7 +73,8 @@ function App() {
   };
 
   async function fetchBoards() {
-    const url = `http://localhost:4000`;
+    //const url = `https://kudos-board-34wu.onrender.com`;
+    const url = ` http://localhost:4000`;
     const response = await fetch(url);
     const data = await response.json();
     setBoards(() => data);

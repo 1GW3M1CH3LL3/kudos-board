@@ -1,12 +1,28 @@
 function BoardCard(props) {
   const imgId = Math.floor(Math.random() * 100);
+
+  const deleteBoard = async () => {
+    console.log("deleting");
+    try {
+      props.setBoards((boards) =>
+        boards.filter((board) => board.id !== props.id)
+      );
+      console.log(props);
+      const response = await fetch(`http://localhost:4000/${props.id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok()) {
+        alert("failed to delete");
+      }
+    } catch (error) {}
+  };
   return (
     <div className="card">
       <img src={`https://picsum.photos/id/${imgId}/200/300`} alt="" />
       <h3>{props.title}</h3>
       <p>{props.category}</p>
       <button>View Board</button>
-      <button>Delete Board</button>
+      <button onClick={deleteBoard}>Delete Board</button>
     </div>
   );
 }
