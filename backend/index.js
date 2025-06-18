@@ -4,8 +4,10 @@ const app = express();
 const PORT = 4000;
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
@@ -16,15 +18,20 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
+  console.log(req.body);
   const { title, category } = req.body;
-  const newBoard = await prisma.board.create({
-    data: {
-      title,
-      category,
-      //   card,
-    },
-  });
-  res.json(newBoard);
+  try {
+    const newBoard = await prisma.board.create({
+      data: {
+        title,
+        category,
+        //   card,
+      },
+    });
+    res.json(newBoard);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 app.get("/:boardId", async (req, res) => {

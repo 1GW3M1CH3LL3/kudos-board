@@ -10,18 +10,24 @@ function CreateBoard(props) {
   const [newTitle, setNewTitle] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
-  const createBoard = () => {
+  const createBoard = async () => {
     let newData = {
-      id: String(boards_data.length + 1),
       title: newTitle,
       category: newCategory,
     };
     // img:
     // author: newAuthor,
+    // make  a POST call to local server with newdata in req body
+    const response = await fetch("http://localhost:4000", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newData),
+    });
+
     props.setIsClick(false);
-    boards_data.push(newData);
-    props.setBoards(boards_data);
-    console.log(boards_data);
+    const res = await response.json();
+
+    props.setBoards([...props.boards, res]);
   };
   return (
     <div className="modal">
