@@ -2,7 +2,7 @@
 
 Submitted by: **Adaora Michelle Igwe**
 
-Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-board-34wu.onrender.com)
+Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-board-1-ydp5.onrender.com/)
 
 ### Application Features
 
