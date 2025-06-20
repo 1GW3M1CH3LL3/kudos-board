@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router";
 function BoardCard(props) {
   const imgId = Math.floor(Math.random() * 100);
-
+  let navigate = useNavigate();
   const deleteBoard = async () => {
     console.log("deleting");
     try {
@@ -16,12 +17,19 @@ function BoardCard(props) {
       }
     } catch (error) {}
   };
+
   return (
-    <div className="card">
+    <div className="board">
       <img src={`https://picsum.photos/id/${imgId}/200/300`} alt="" />
       <h3>{props.title}</h3>
       <p>{props.category}</p>
-      <button>View Board</button>
+      <button
+        onClick={() => {
+          navigate(`/boarddetails/${props.id}`);
+        }}
+      >
+        View Board
+      </button>
       <button onClick={deleteBoard}>Delete Board</button>
     </div>
   );

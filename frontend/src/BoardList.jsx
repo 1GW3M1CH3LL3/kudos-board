@@ -3,7 +3,7 @@ import BoardCard from "./BoardCard";
 import { useEffect } from "react";
 
 function BoardList(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <div className="board-list">
       {props.boards.length === 0 ? (
