@@ -90,3 +90,21 @@ app.delete("/:cardId", async (req, res) => {
   });
   res.json(deletedCard);
 });
+
+app.put("/:cardId", async (req, res) => {
+  const cardId = parseInt(req.params.cardId);
+  try {
+    const updatedUpVote = await prisma.card.update({
+      where: {
+        id: cardId,
+      },
+
+      data: {
+        upvote: { increment: 1 },
+      },
+    });
+    res.json(updatedUpVote);
+  } catch (error) {
+    console.log(error);
+  }
+});
