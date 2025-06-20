@@ -14,6 +14,7 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [isClick, setIsClick] = useState(false);
   const [createCard, setCreateCard] = useState(false);
+  const [gifUrl, setGifUrl] = useState("");
   const getSearchResults = async (value) => {
     // let items = [...boards];
     await fetchBoards();
@@ -92,6 +93,8 @@ function App() {
           path="/boarddetails/:id"
           element={
             <BoardDetail
+              gifUrl={gifUrl}
+              setGifUrl={setGifUrl}
               setCreateCard={setCreateCard}
               createCard={createCard}
             />

@@ -58,6 +58,8 @@ function BoardDetail(props) {
             id={id}
             setCreateCard={props.setCreateCard}
             createCard={props.createCard}
+            gifUrl={props.gifUrl}
+            setGifUrl={props.setGifUrl}
           />
         )}
         <i
@@ -82,6 +84,8 @@ function BoardDetail(props) {
               cardTitle={car.title}
               description={car.description}
               owner={car.owner}
+              gifUrl={props.gifUrl}
+              setGifUrl={props.setGifUrl}
             />
           ))}
         </div>

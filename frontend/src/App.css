@@ -17,7 +17,15 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
+.gif{
+  padding-right: 10px;
+}
+.gif-grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .board-list{
   display: flex;
   flex-direction: row;

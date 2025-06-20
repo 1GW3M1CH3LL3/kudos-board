@@ -22,6 +22,7 @@ function Card(props) {
     <div className="card">
       <h3>{props.cardTitle}</h3>
       <p>{props.description}</p>
+      <img src={props.gifUrl} height="100px" width="160px" alt="" />
       <p>{props.owner}</p>
       <button onClick={() => setUpvotecount(() => upvotecount + 1)}>
         Upvote {upvotecount}

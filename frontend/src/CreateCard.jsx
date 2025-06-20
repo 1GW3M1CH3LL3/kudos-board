@@ -8,14 +8,14 @@ function CreateCard(props) {
   const [gifResults, setGifResults] = useState([]);
   async function handleGifSearch() {
     const apiKey = import.meta.env.VITE_API_KEY;
-    const res = await fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${newGif}&apiKey=${apiKey}&limit=6`
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/search?q=${newGif}&api_key=${apiKey}&limit=6`
     );
-    const data = await res.json;
-    setGifResults("1", data.data);
+    const data = await response.json();
+    setGifResults(data.data);
     console.log(data.data);
   }
-  handleGifSearch();
+
   const createCard = async () => {
     console.log("isu");
     let newData = {
@@ -38,6 +38,7 @@ function CreateCard(props) {
       props.setCards([...props.cards, res]);
     } else {
       alert("FILL IN THE REQUIRED FORMS");
+      props.setGifUrl("");
     }
   };
   return (
@@ -66,8 +67,29 @@ function CreateCard(props) {
             placeholder="Search GIFs.."
             required
           />
-          <button type="button">Search</button>
-          <input type="text" placeholder="Enter GIF URL" required />
+          <button type="button" onClick={() => handleGifSearch()}>
+            Search
+          </button>
+          <div className="gif-grid">
+            <div className="gif">
+              {gifResults.map((gif) => (
+                <img
+                  onClick={() => props.setGifUrl(gif.images.fixed_height.url)}
+                  width="60px"
+                  height="50px"
+                  key={gif.id}
+                  src={gif.images.fixed_height.url}
+                  alt="gif"
+                />
+              ))}
+            </div>
+          </div>
+          <input
+            value={props.gifUrl}
+            type="text"
+            placeholder="Enter GIF URL"
+            required
+          />
           <button type="button">Copy GIF URL</button>
           <input
             type="text"
