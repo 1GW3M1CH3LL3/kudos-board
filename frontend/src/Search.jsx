@@ -20,6 +20,12 @@ function Search(props) {
     <div>
       <form action="search">
         <input
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSearch();
+            }
+          }}
           className="search-form"
           value={searchVal}
           placeholder="Search"
