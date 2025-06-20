@@ -34,20 +34,59 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.post("/:boardId", async (req, res) => {
+  console.log(req.body);
+  try {
+    const { boardId, title, description, gif, owner } = req.body;
+
+    const newCard = await prisma.card.create({
+      data: {
+        board: { connect: { id: Number(boardId) } },
+        title,
+        description,
+        gif,
+        owner,
+      },
+    });
+    res.json(newCard);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 app.get("/:boardId", async (req, res) => {
   const boardId = parseInt(req.params.boardId);
   const board = await prisma.board.findUnique({
     where: {
       id: boardId,
     },
+    include: { card: true },
   });
   res.json(board);
 });
-
-app.delete("/:boardId", async (req, res) => {
+// app.get("/boarddetails/:boardId", async (req, res) => {
+//   const boardId = parseInt(req.params.boardId);
+//   console.log(boardId);
+//   const board = await prisma.board.findUnique({
+//     where: {
+//       id: boardId,
+//     },
+//   });
+//   res.json(board.card);
+// });
+app.delete("/boarddetails/:boardId", async (req, res) => {
   const boardId = parseInt(req.params.boardId);
   const deletedBoard = await prisma.board.delete({
     where: { id: boardId },
   });
   res.json(deletedBoard);
+});
+
+app.delete("/:cardId", async (req, res) => {
+  const cardId = parseInt(req.params.cardId);
+  console.log(cardId);
+  const deletedCard = await prisma.card.delete({
+    where: { id: cardId },
+  });
+  res.json(deletedCard);
 });

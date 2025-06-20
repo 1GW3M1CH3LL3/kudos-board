@@ -1,5 +1,5 @@
 import React from "react";
-import { boards_data } from "./App";
+
 import { useState } from "react";
 import Category from "./Category";
 
@@ -15,19 +15,20 @@ function CreateBoard(props) {
       title: newTitle,
       category: newCategory,
     };
-    // img:
-    // author: newAuthor,
-    // make  a POST call to local server with newdata in req body
-    const response = await fetch("http://localhost:4000", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newData),
-    });
+    if (newTitle && newCategory) {
+      const response = await fetch("http://localhost:4000", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newData),
+      });
 
-    props.setIsClick(false);
-    const res = await response.json();
+      props.setIsClick(false);
+      const res = await response.json();
 
-    props.setBoards([...props.boards, res]);
+      props.setBoards([...props.boards, res]);
+    } else {
+      alert("FILL IN REQUIRED FIELDS!");
+    }
   };
   return (
     <div className="modal">
