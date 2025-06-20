@@ -6,6 +6,7 @@ function CreateCard(props) {
   const [newGif, setNewGif] = useState("");
   const [newOwner, setNewOwner] = useState("");
   const [gifResults, setGifResults] = useState([]);
+
   async function handleGifSearch() {
     const apiKey = import.meta.env.VITE_API_KEY;
     const response = await fetch(
@@ -13,19 +14,21 @@ function CreateCard(props) {
     );
     const data = await response.json();
     setGifResults(data.data);
-    console.log(data.data);
   }
 
+  const close = () => {
+    props.setCreateCard(false);
+  };
+
   const createCard = async () => {
-    console.log("isu");
     let newData = {
       boardId: props.id,
       title: newTitle,
       description: newDescription,
-      gif: newGif,
+      gif: props.gifUrl,
       owner: newOwner,
     };
-    if (newTitle && newDescription && newGif && newOwner) {
+    if (newTitle && newDescription && newGif) {
       const response = await fetch(`http://localhost:4000/${props.id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,14 +41,15 @@ function CreateCard(props) {
       props.setCards([...props.cards, res]);
     } else {
       alert("FILL IN THE REQUIRED FORMS");
-      props.setGifUrl("");
     }
+    props.setGifUrl("");
   };
   return (
     <div className="modal">
       <div className="modal-content">
+        <i className="fa-solid fa-xmark" onClick={close}></i>
         <h3>Create a New Card</h3>
-        <form action="create-card">
+        <form action="" className="create-card">
           <input
             type="text"
             value={newTitle}
@@ -67,7 +71,11 @@ function CreateCard(props) {
             placeholder="Search GIFs.."
             required
           />
-          <button type="button" onClick={() => handleGifSearch()}>
+          <button
+            className="create-card-but"
+            type="button"
+            onClick={() => handleGifSearch()}
+          >
             Search
           </button>
           <div className="gif-grid">
@@ -90,14 +98,20 @@ function CreateCard(props) {
             placeholder="Enter GIF URL"
             required
           />
-          <button type="button">Copy GIF URL</button>
+          <button className="create-card-but" type="button">
+            Copy GIF URL
+          </button>
           <input
             type="text"
             value={newOwner}
             onChange={(e) => setNewOwner(e.target.value)}
             placeholder="Enter owner (optional)"
           />
-          <button type="button" onClick={createCard}>
+          <button
+            className="create-card-but"
+            type="button"
+            onClick={createCard}
+          >
             Create Card
           </button>
         </form>

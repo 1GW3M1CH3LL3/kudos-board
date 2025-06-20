@@ -14,40 +14,22 @@ function BoardDetail(props) {
   };
   useEffect(() => {
     fetchCards();
-    console.log("hi");
   }, [id]);
   let fetchCards = async () => {
-    //const url = `https://kudos-board-34wu.onrender.com`;
     const url = `http://localhost:4000/${id}`;
-    console.log(id);
-    console.log("1");
+
     try {
       const response = await fetch(url);
-      console.log(response);
+
       const data = await response.json();
-      console.log(data);
-      console.log("3");
-      console.log("gotten to printing data");
-      console.log("4");
-      console.log(data);
-      console.log("5");
+
       setBoard(() => data);
       setCards(() => data.card);
-      console.log(cards);
-      console.log("6");
     } catch (error) {
       console.error(error);
-      console.log("7");
     }
   };
-  useEffect(() => {
-    console.log("he");
-  }, []);
-  useEffect(() => {
-    console.log(cards);
-    console.log(id);
-    console.log("use effect for printing cards ran");
-  }, [cards]);
+
   return (
     <>
       <div>
@@ -70,21 +52,22 @@ function BoardDetail(props) {
           }}
         ></i>
         <h1>{board.title}</h1>
-        {console.log(cards)}
+
         <button onClick={cardForm}>Create a Card</button>
-        {console.log(cards)}
 
         {/* {if(cards){}} */}
         <div className="card-list">
           {cards.map((car) => (
             <Card
+              className="card"
               cards={cards}
               setCards={setCards}
               id={car.id}
               cardTitle={car.title}
               description={car.description}
+              // cardImg={car.img}
               owner={car.owner}
-              gifUrl={props.gifUrl}
+              gifUrl={car.gif}
               setGifUrl={props.setGifUrl}
             />
           ))}

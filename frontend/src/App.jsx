@@ -16,9 +16,7 @@ function App() {
   const [createCard, setCreateCard] = useState(false);
   const [gifUrl, setGifUrl] = useState("");
   const getSearchResults = async (value) => {
-    // let items = [...boards];
     await fetchBoards();
-    console.log(value);
     setBoards((boards) =>
       boards.filter((board) =>
         board.title.toLowerCase().includes(value.toLowerCase())
@@ -27,7 +25,6 @@ function App() {
   };
 
   async function fetchBoards() {
-    //const url = `https://kudos-board-34wu.onrender.com`;
     const url = ` http://localhost:4000`;
     const response = await fetch(url);
     const data = await response.json();
@@ -37,18 +34,11 @@ function App() {
     fetchBoards();
   }, []);
   const getBoard = async (value) => {
-    //
-    //let items = [...boards];
-    //console.log("check items", items);
     if (value === "all") {
       await fetchBoards();
     } else if (value === "recent") {
       await fetchBoards();
-      /*let items = [...boards];
 
-      items = items.slice(items.length - 6, items.length);*/
-      console.log("recent");
-      // console.log(items);
       setBoards((boards) => boards.slice(boards.length - 6, boards.length));
     } else {
       await fetchBoards();
@@ -58,8 +48,6 @@ function App() {
         )
       );
     }
-    // console.log(boards);
-    // console.log(items);
   };
   return (
     <BrowserRouter>
@@ -86,6 +74,7 @@ function App() {
                   setBoards={setBoards}
                 />
               )}
+              <footer>Kudos Board 2025</footer>
             </>
           }
         />

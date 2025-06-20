@@ -4,14 +4,13 @@ function Card(props) {
   //   let navigate = useNavigate();
   const [upvotecount, setUpvotecount] = useState(0);
   const deleteCard = async () => {
-    console.log("deleting");
     try {
       props.setCards((cards) => cards.filter((card) => card.id !== props.id));
-      console.log(props);
+
       const response = await fetch(`http://localhost:4000/${props.id}`, {
         method: "DELETE",
       });
-      console.log(response);
+
       if (!response.ok()) {
         alert("failed to delete");
       }
