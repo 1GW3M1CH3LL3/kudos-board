@@ -3,6 +3,7 @@ import Category from "./Category";
 function Header(props) {
   return (
     <>
+      <header>KUDOBOARD</header>
       <Search getSearchResults={props.getSearchResults} />
       <Category
         boards={props.boards}

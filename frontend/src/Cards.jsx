@@ -23,9 +23,7 @@ function Card(props) {
       <p>{props.description}</p>
       <img src={props.gifUrl} height="100px" width="160px" alt="" />
       <p>{props.owner}</p>
-      <button onClick={() => setUpvotecount(() => upvotecount + 1)}>
-        Upvote {upvotecount}
-      </button>
+      <button onClick={() => props.upvote + 1}>Upvote {props.upvote}</button>
       <button onClick={deleteCard}>Delete</button>
     </div>
   );

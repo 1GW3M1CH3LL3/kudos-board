@@ -55,7 +55,7 @@ function BoardDetail(props) {
 
         <button onClick={cardForm}>Create a Card</button>
 
-        {/* {if(cards){}} */}
+        {console.log(cards)}
         <div className="card-list">
           {cards.map((car) => (
             <Card
@@ -65,7 +65,7 @@ function BoardDetail(props) {
               id={car.id}
               cardTitle={car.title}
               description={car.description}
-              // cardImg={car.img}
+              upvote={car.upvote}
               owner={car.owner}
               gifUrl={car.gif}
               setGifUrl={props.setGifUrl}
