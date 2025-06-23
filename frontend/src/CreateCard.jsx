@@ -29,11 +29,14 @@ function CreateCard(props) {
       owner: newOwner,
     };
     if (newTitle && newDescription && newGif) {
-      const response = await fetch(`http://localhost:4000/${props.id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newData),
-      });
+      const response = await fetch(
+        `https://kudos-board-34wu.onrender.com${props.id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newData),
+        }
+      );
 
       props.setCreateCard(false);
       const res = await response.json();

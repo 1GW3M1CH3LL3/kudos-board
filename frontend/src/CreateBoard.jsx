@@ -16,7 +16,7 @@ function CreateBoard(props) {
       category: newCategory,
     };
     if (newTitle && newCategory) {
-      const response = await fetch("http://localhost:4000", {
+      const response = await fetch("https://kudos-board-34wu.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newData),
