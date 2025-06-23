@@ -8,7 +8,7 @@ function BoardCard(props) {
         boards.filter((board) => board.id !== props.id)
       );
       const response = await fetch(
-        `https://kudos-board-34wu.onrender.com${props.id}`,
+        `https://kudos-board-34wu.onrender.com/boarddetails/${props.id}`,
         {
           method: "DELETE",
         }

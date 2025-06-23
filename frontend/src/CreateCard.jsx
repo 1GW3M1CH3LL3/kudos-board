@@ -30,7 +30,7 @@ function CreateCard(props) {
     };
     if (newTitle && newDescription && newGif) {
       const response = await fetch(
-        `https://kudos-board-34wu.onrender.com${props.id}`,
+        `https://kudos-board-34wu.onrender.com/${props.id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

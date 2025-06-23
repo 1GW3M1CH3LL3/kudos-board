@@ -63,6 +63,7 @@ function BoardDetail(props) {
               cards={cards}
               setCards={setCards}
               id={car.id}
+              key={car.id}
               cardTitle={car.title}
               description={car.description}
               upvote={car.upvote}
