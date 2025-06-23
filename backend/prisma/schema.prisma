@@ -22,10 +22,11 @@ model Board {
 
 model Card {
   id          Int    @id @default(autoincrement())
-  board       Board  @relation(fields: [boardId], references: [id])
+  board       Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId     Int
   title       String
   description String
   gif         String
   owner       String
+  upvote      Int    @default(0)
 }
