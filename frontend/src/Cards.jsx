@@ -5,9 +5,12 @@ function Card(props) {
   const [upvotecount, setUpvotecount] = useState(props.upvote);
   const addUpVote = async () => {
     console.log("isu");
-    const response = await fetch(`http://localhost:4000/${props.id}`, {
-      method: "PUT",
-    });
+    const response = await fetch(
+      `https://kudos-board-34wu.onrender.com/${props.id}`,
+      {
+        method: "PUT",
+      }
+    );
     const res = await response.json();
     setUpvotecount(res.upvote);
   };
@@ -15,9 +18,12 @@ function Card(props) {
     try {
       props.setCards((cards) => cards.filter((card) => card.id !== props.id));
 
-      const response = await fetch(`http://localhost:4000/${props.id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://kudos-board-34wu.onrender.com/${props.id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok()) {
         alert("failed to delete");

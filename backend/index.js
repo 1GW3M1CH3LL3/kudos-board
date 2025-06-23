@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(
+    `Server is running on https://kudos-board-34wu.onrender.com:${PORT}`
+  );
 });
 
 app.get("/", async (req, res) => {

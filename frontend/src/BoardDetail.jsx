@@ -16,7 +16,7 @@ function BoardDetail(props) {
     fetchCards();
   }, [id]);
   let fetchCards = async () => {
-    const url = `http://localhost:4000/${id}`;
+    const url = `https://kudos-board-34wu.onrender.com/${id}`;
 
     try {
       const response = await fetch(url);
